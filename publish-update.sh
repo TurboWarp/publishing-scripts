@@ -25,5 +25,5 @@ echo "Publishing version $new_version"
 
 npm test
 "$dirname/update-package-version.py" "$new_version"
-npm publish --dry-run --access=public
+npm publish --access=public
 git checkout -- package.json package-lock.json
