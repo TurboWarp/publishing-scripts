@@ -36,7 +36,7 @@ npm run build
 npm test
 
 # upload production version to npm
-NODE_ENV=production npm publish --access=public
+npm publish --access=public
 
 # reset temporary changes
 git checkout -- package.json package-lock.json
