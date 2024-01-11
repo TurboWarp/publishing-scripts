@@ -23,7 +23,20 @@ new_version="$current_date-$git_shorthash"
 
 echo "Publishing version $new_version"
 
-npm test
+# set this first in case the version number somehow breaks build or test
 "$dirname/update-package-version.py" "$new_version"
-npm publish --access=public
+
+# get to a known clean state
+rm -rf dist
+npm ci
+
+# make sure its a valid release
+# test often needs build to succeed first
+npm run build
+npm test
+
+# upload production version to npm
+NODE_ENV=production npm publish --access=public
+
+# reset temporary changes
 git checkout -- package.json package-lock.json
