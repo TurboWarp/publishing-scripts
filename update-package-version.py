@@ -21,7 +21,10 @@ def update(filename):
     has_trailing_newline = contents.endswith('\n')
 
     data = json.loads(contents)
-    data['version'] = f"{data['version']}-{new_version}"
+
+    version = data['version'].split('.')
+    version[2] = new_version
+    data['version'] = '.'.join(version)
 
     new_contents = json.dumps(
         data,

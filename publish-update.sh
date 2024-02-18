@@ -17,10 +17,7 @@ if [[ $(git status --porcelain) ]]; then
     fatal "Uncommitted changes"
 fi
 
-current_date=$(date +"%Y%m%d%H%M")
-git_shorthash=$(git rev-parse --short HEAD)
-new_version="$current_date-$git_shorthash"
-
+new_version=$(date +"%Y%m%d%H%M")
 echo "Publishing version $new_version"
 
 # set this first in case the version number somehow breaks build or test
